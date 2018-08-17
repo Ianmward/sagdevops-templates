@@ -1,4 +1,5 @@
-###############################################################################
+#!/bin/sh -e
+#*******************************************************************************
 #  Copyright 2013 - 2018 Software AG, Darmstadt, Germany and/or its licensors
 #
 #   SPDX-License-Identifier: Apache-2.0
@@ -15,30 +16,16 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.                                                            
 #
-###############################################################################
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: cc-deployment
-  namespace: cc-namespace
-spec:
-  selector:
-    matchLabels:
-      app: cc
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: cc
-    spec:
-      containers:
-      - name: cc
-        image: store/softwareag/commandcentral:10.2-server
-        ports:
-        - containerPort: 8091
-        env:
-        - name: CC_PASSWORD
-          value: manage
-      imagePullSecrets:
-      - name: cc-registrypullsecret
-          
+#*******************************************************************************
+
+# if managed image
+if [ -d $SAG_HOME/profiles/SPM ] ; then
+    # point to local SPM
+    export CC_SERVER=http://localhost:8092/spm
+    export __is_instance_name=${__is_instance_name:-default}
+
+    echo "Verifying managed container $CC_SERVER ..."
+    sagcc get inventory products -e wst --wait-for-cc
+fi
+
+echo "DONE testing"
