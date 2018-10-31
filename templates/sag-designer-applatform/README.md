@@ -17,18 +17,17 @@
 
 -->
 
-# Optimize Web Service Data Collector
+# Application Platform on Designer
 
-> STATUS: INCUBATING
-
-Use this template to install Optimize Web Service Data Collector 10.1 and higher.
+Use this template to provision Application Platform on Designer.
 
 ## Requirements
+None
 
 ### Supported Software AG releases
 
+* Designer 10.1 and higher
 * Command Central 10.1 and higher
-* Optimize Web Service Data Collector 10.1 and higher
 
 ### Supported platforms
 
@@ -36,16 +35,19 @@ All supported Windows and UNIX platforms.
 
 ### Supported use cases
 
-* Provisioning Optimize Web Service Data Collector version 10.1 and higher
-* Installing Optimize Web Service Data Collector latest fixes
-* Adding basic Optimize Web Service Data Collector configuration
+Provisioning Application Platform on Designer 10.1 or higher 
 
-## Example how to run the composite template
+## Running as a composite template
 
-To provision a default instance of Optimize Web Service Data Collector:
+1. To import the sag-designer-appplatform/template.yaml file in Command Central, use one of the methods described in [Importing templates library](https://github.com/SoftwareAG/sagdevops-templates/wiki/Importing-templates-library)
+2. To apply the template, follow the instructions in [Applying template using Command Central CLI](https://github.com/SoftwareAG/sagdevops-templates/wiki/Using-default-templates#applying-template-using-command-central-cli)
+
+### Example
+To provision Application Platform on Designer with alias `dev1`:
 
 ```bash
-sagcc exec templates composite apply sag-optimize-wsdc nodes=optimize \
-   repo.product=optimize repo.fix=Empower \
-   --sync-job --wait 360
+sagcc exec templates composite apply sag-designer-appplatform nodes=dev1 \
+  repo.product=products-10.2 \
+  repo.fix=fixes-10.2 \
+  --sync-job --wait 360
 ```
