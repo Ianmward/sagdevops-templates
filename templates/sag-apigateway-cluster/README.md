@@ -36,8 +36,10 @@ Before using this template, you must provision Terracotta cluster and Internal D
 
 ### Supported Software AG releases
 
-* API Gateway 10.1 and higher
 * Command Central 10.3 and higher
+* API Gateway with Integration Server 10.1 and higher
+* API Gateway with Microservices Runtime 10.1 to 10.3
+> NOTE: This template is not supported for Microservices Runtime version 10.4.
 
 ### Supported platforms
 
@@ -60,7 +62,7 @@ For information about applying templates, see [Applying template using Command C
 To provision a new Integration Server instance named "apigateway" with API Gateway 10.3, install all latest fixes, and configure the cluster:
 
 ```bash
-sagcc exec templates composite apply sag-apigateway-cluster nodes=[dev1, dev2] \
+sagcc exec templates composite apply sag-apigateway-cluster nodes=[dev1,dev2] \
   is.instance.type=integrationServer \
   agw.memory.max=512 \ 
   agw.tsa.url="dev1:9010" \

@@ -19,9 +19,11 @@
 
 # Application Platform
 
-Use this template to provision Application Platform 10.1 and higher.
+Use this template to provision Application Platform 10.1 and higher on an existing Microservices Runtime or Integration Server instance with the same version.
 
 ## Requirements and Limitations
+
+None.
 
 ### Supported Software AG releases
 
@@ -29,6 +31,9 @@ The template is tested and supported for the following releases:
 
 * Command Central 10.1 and higher
 * Application Platform 10.1 and higher
+* Integration Server 10.1 and higher
+* Microservices Runtime 10.1 to 10.3
+> NOTE: This template is not supported for Microservices Runtime version 10.4.
 
 ### Supported platforms
 
@@ -48,10 +53,10 @@ All supported Windows and UNIX platforms.
 
 ### Provisioning Application Platform on Microservices Runtime
 
-1. Provision an instance of Microservices Runtime on a managed node with alias `dev1`:
+1. Provision an instance of Microservices Runtime on a managed node with alias `dev1` using the sag-msc-server-103-and-lower template:
 
 	```bash
-	sagcc exec templates composite apply sag-msc-server nodes=dev1 \
+	sagcc exec templates composite apply sag-msc-server-103-and-lower nodes=dev1 \
   	repo.product=products-10.1 \
   	repo.fix=fixes-10.1 \
   	--sync-job --wait 360
@@ -64,6 +69,7 @@ All supported Windows and UNIX platforms.
 	sagcc exec templates composite apply sag-is-applatform nodes=dev1 \
 	 repo.product=products-10.1 \
 	 repo.fix=fixes-10.1 \
+	 is.instance.type=MSC \
 	 --sync-job --wait 360
 	```
 
@@ -75,7 +81,7 @@ sagcc list jobmanager jobs <jobIdFromCommand> --wait 360 -e DONE
 
 ### Provisioning Application Platform on Integration Server
 
-1. Provision an instance of Integration Server on a managed node with alias `dev2`:
+1. Provision an instance of Integration Server on a managed node with alias `dev2` using the sag-is-server template:
 
 	```bash
 	sagcc exec templates composite apply sag-is-server nodes=dev2 \
